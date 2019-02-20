@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo App</title>
+</head>
+<body>
+	<a href="/logout">logout</a>
+	<h1>Todo App</h1>
+	<form action="/add-item" method="post">
+	    <input type="text" name="item">
+	    <input type="submit" value="submit">
+	</form>
+	<form action="/modify-item" method="post" >
+	<ul> 
+		{% for todo in todos %}
+			<li>
+			{% if todo.completed == false %}
+					{{todo.content}}
+					<a href="/flip_true/{{ todo.id }}">Done</a>
+        			<a href="/delete/{{ todo.id }}">Delete</a>
+			{% else %}
+					<strike>{{todo.content}}</strike>
+					<a href="/flip_false/{{ todo.id }}">Undo</a>
+        			<a href="/delete/{{ todo.id }}">Delete</a>
+			{% endif %}
+				
+        	</li>
+		{% endfor %}
+	</ul>
+	</form>
+</body>
+</html>
